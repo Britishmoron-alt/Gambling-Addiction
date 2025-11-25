@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animated Slots Game</title>
+<style>
+    body {
+        font-family: sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+        margin: 0;
+    }
+    .slot-machine {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+    .reel {
+        width: 80px;
+        height: 100px;
+        background-color: #fff;
+        border: 2px solid #333;
+        border-radius: 5px;
+        overflow: hidden; /* Hides symbols outside the viewable area */
+        position: relative;
+    }
+    .symbol-list {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        font-size: 40px;
+        line-height: 100px; /* Centers the symbol vertically within its 100px height */
+        margin: 0;
+        padding: 0;
+        /* Default state, ready for animation */
+        transform: translateY(0);
+        transition: transform 0.5s ease-out; /* Smooth transition to stop position */
+    }
+    .controls {
+        text-align: center;
+    }
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    #result-message {
+        margin-top: 10px;
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+    }
+    .money-area {
+        margin-top: 15px;
+        font-size: 16px;
+    }
+    #money-display {
+        font-weight: bold;
+        color: green;
+    }
+    #bet-amount {
+        width: 50px;
+        padding: 5px;
+        font-size: 16px;
+    }
+
+    /* Keyframe animation for continuous spinning */
+    @keyframes spinReel {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-500px); /* Moves symbols up one full cycle (5 symbols * 100px height) */ }
+    }
+
+    /* Class to apply the spinning animation */
+    .spinning {
+        animation: spinReel 0.1s linear infinite; /* Fast, continuous loop */
+    }
+</style>
+</head>
+<body>
+    <h1>Animated Slots</h1>
+    <div class="slot-machine">
+        <div class="reel" id="reel1">
+            <div class="symbol-list" id="list1"></div>
+        </div>
+        <div class="reel" id="reel2">
+            <div class="symbol-list" id="list2"></div>
+        </div>
+        <div class="reel" id="reel3">
+            <div class="symbol-list" id="list3"></div>
+        </div>
+    </div>
+    <div class="controls">
+        <div class="money-area"> Money: <span id="money-display">$100</span> </div>
+        <div class="money-area"> Bet: <input type="number" id="bet-amount" value="1" min="1"> </div>
+        <button id="spin-button">Spin</button>
+        <p id="result-message"></p>
+    </div>
+    <script>
+        const symbols = ['%', '$', '#', '@', '!'];
+        // Double the symbols for a smooth continuous spin effect
+        const displaySymbols = [...symbols, ...symbols]; 
+        const reelLists = [
+            document.getElementById('list1'),
+            document.getElementById('list2'),
+            document.getElementById('list3')
+        ];
+        const spinButton = document.getElementById('spin-button');
+        const resultMessage = document.getElementById('result-message');
+        const moneyDisplay = document.getElementById('money-display');
+        const betAmountInput = document.getElementById('bet-amount');
+
+        let money = 2500;
+        let spinning = false;
+        const symbolHeight = 100; // Matches CSS reel height
+
+        // Populate the reels with symbols
+        reelLists.forEach(list => {
+            displaySymbols.forEach(symbol => {
+                const span = document.createElement('span');
+                span.textContent = symbol;
+                // Each symbol occupies a 100px vertical space within the list div
+                span.style.display = 'block'; 
+                list.appendChild(span);
+            });
+        });
+
+        updateMoneyDisplay();
+        spinButton.addEventListener('click', spin);
+
+        function updateMoneyDisplay() {
+            moneyDisplay.textContent = `$${money}`;
+        }
+
+        function spin() {
+            if (spinning) return;
+            const bet = parseInt(betAmountInput.value);
+            if (isNaN(bet) || bet <= 0) {
+                resultMessage.textContent = "Please enter a valid bet amount.";
+                return;
+            }
+            if (money < bet) {
+                resultMessage.textContent = "Not enough money to place this bet!";
+                return;
+            }
+
+            money -= bet;
+            updateMoneyDisplay();
+            resultMessage.textContent = "Spinning...";
+            spinning = true;
+            spinButton.disabled = true;
+            betAmountInput.disabled = true;
+
+            const spinDuration = 2000; // 2 seconds spin
+            const stopPositions = [];
+
+            reelLists.forEach((list, index) => {
+                // Add the spinning CSS class to start the animation
+                list.classList.add('spinning');
+
+                // Determine a random final symbol index from the original symbols list
+                const finalSymbolIndex = Math.floor(Math.random() * symbols.length);
+                stopPositions.push(finalSymbolIndex);
+
+                // Wait for the duration of the spin, then stop the animation
+                setTimeout(() => {
+                    stopReel(list, finalSymbolIndex, index === 2, bet, stopPositions);
+                }, spinDuration + (index * 100)); // Stagger the stops slightly
+            });
+        }
+
+        function stopReel(list, finalSymbolIndex, isLastReel, bet, stopPositions) {
+            // Remove the continuous spinning animation class
+            list.classList.remove('spinning');
+
+            // Calculate the exact Y position needed to show the correct symbol
+            // The list has 10 symbols (5*2). We want the symbol in the *second* half of the list 
+            // to align perfectly after the animation stops.
+            const targetY = -(finalSymbolIndex * symbolHeight + symbols.length * symbolHeight);
+            
+            // Set the transform to the target Y position with a smooth transition (defined in CSS)
+            list.style.transform = `translateY(${targetY}px)`;
+
+            if (isLastReel) {
+                // After all reels stop, reset the state and check the win
+                setTimeout(() => {
+                    checkWin(stopPositions.map(i => symbols[i]), bet);
+                    spinning = false;
+                    spinButton.disabled = false;
+                    betAmountInput.disabled = false;
+                    resetReelPositions();
+                }, 500); // Short delay for visual effect
+            }
+        }
+
+        function resetReelPositions() {
+            reelLists.forEach(list => {
+                // Instantly jump back to the starting position for the next spin
+                list.style.transition = 'none'; // Temporarily disable transition for instant jump
+                list.style.transform = 'translateY(0)';
+                // Re-enable transition for the next stop animation
+                void list.offsetWidth; // Trigger reflow to apply transition change
+                list.style.transition = 'transform 0.5s ease-out';
+            });
+        }
+
+
+        function checkWin(currentSymbols, bet) {
+            if (currentSymbols[0] === currentSymbols[1] && currentSymbols[1] === currentSymbols[2]) {
+                const winnings = bet * 10;
+                money += winnings;
+                resultMessage.textContent = `JACKPOT! 3 matching: you won $${winnings}`;
+            } else if (currentSymbols[0] === currentSymbols[1] || currentSymbols[1] === currentSymbols[2] || currentSymbols[0] === currentSymbols[2]) {
+                const winnings = bet * 2;
+                money += winnings;
+                resultMessage.textContent = `Two matching: you won $${winnings}`;
+            } else {
+                resultMessage.textContent = "No win";
+            }
+            updateMoneyDisplay();
+        }
+    </script>
+</body>
+</html>
