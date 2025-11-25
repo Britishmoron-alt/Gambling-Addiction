@@ -11,5 +11,5 @@ Gambling10: slots, starts with 100$
 
 Gambling20: more games in one
 
-Gambling30C: competetitive versions, using in-game currency run over a server (almost done)
+Gambling300C: competetitive versions, using in-game currency run over a server (almost done)
 # NOTE: NO REAL MONEY IS USED IN THESE, ALL IN-GAME.
