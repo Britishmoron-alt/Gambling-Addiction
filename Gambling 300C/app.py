@@ -13,22 +13,22 @@ GAMES = [
     {
         "name": "Slots",
         "file": "slots.html",
-        "title": "Competitive Online Slots",
-        "description": "Try your luck and compete for a place on the leaderboard!",
+        "title": "Online Slots",
+        "description": "Try your luck and compete for a place on the leaderboard.",
         "template": "slots"
     },
     {
-        "name": "Pac-Man Challenge",
+        "name": "Pac-Man",
         "file": "pacman.html",
         "title": "Pac-Man Challenge",
-        "description": "Eat all dots, dodge ghosts, win big cash based on remaining lives!",
+        "description": "Eat all dots, dodge ghosts, win big cash based on remaining lives. (IDEA FROM LEON)",
         "template": "pacman"
     },
     {
-        "name": "Super Gamble",
+        "name": "Double/Nothing",
         "file": "gambleall.html",
-        "title": "Super Gamble: Double or Nothing",
-        "description": "Wager your entire balance on a 50/50 shot to double it — or lose it all instantly!",
+        "title": "Double or Nothing",
+        "description": "Wager your entire balance on a 50/50 shot to double it or lose it",
         "template": "gambleall"
     }
 ]
