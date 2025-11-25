@@ -3,7 +3,7 @@ import json
 from flask import Flask, jsonify, request, session, send_from_directory
 
 app = Flask(__name__)
-app.secret_key = "somerandomsecret"
+app.secret_key = "64227120231_6644222277112200223311_-_-_-"
 
 DATA_DIR = "data"
 USERS_FILE = os.path.join(DATA_DIR, "users.json")
