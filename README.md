@@ -8,12 +8,12 @@ Prices might be:
 60000000 tokens = $2.50?
 In other words, if you've got money to spend, you'll probably be on the world leaderboard.
 I think I'll also add in "Leagues" of wealth, basically individual leaderboards of top players for each class. For example:
-Richest: world league
-Richer: Major Leagues 1-5
-Rich: Major League 0
-Middle: Minor League 15
-Below Middle: Minor Leagues 0-14
-0 Dollars: Not on leaderboard.
+- Richest: world league
+- Richer: Major Leagues 1-5
+- Rich: Major League 0
+- Middle: Minor League 15
+- Below Middle: Minor Leagues 0-14
+- 0 Dollars: Not on leaderboard.
 Those with zero will have to use games/zeroGive.html.
 
 # GAMES:
