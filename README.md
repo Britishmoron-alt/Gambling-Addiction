@@ -1,7 +1,20 @@
 # Gambling-Addiction Update V3.4
 Games to worsen gambling addictions, play in moderation (JK)
 Server hosted with Python and run by a Raspi5 8GB.
-No, the server code will NEVER be displayed here.
+No, the server code will NEVER be displayed here
+To achieve my main goal here, once it is hosted, it will be a steady source of income, enought to maintain the site and have some extra cash. Therefore, I also plan to add in-game purchases.
+Not like, popup type stuff, but an actual shop. 
+Prices might be:
+60000000 tokens = $2.50?
+In other words, if you've got money to spend, you'll probably be on the world leaderboard.
+I think I'll also add in "Leagues" of wealth, basically individual leaderboards of top players for each class. For example:
+Richest: world league
+Richer: Major Leagues 1-5
+Rich: Major League 0
+Middle: Minor League 15
+Below Middle: Minor Leagues 0-14
+0 Dollars: Not on leaderboard.
+Those with zero will have to use games/zeroGive.html.
 
 # GAMES:
 Gambling-starter: slots, starts with more money than Gambling10.
