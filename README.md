@@ -1,5 +1,7 @@
 # Gambling-Addiction Update V3.4
 Games to worsen gambling addictions, play in moderation (JK)
+Server hosted with Python and run by a Raspi5 8GB.
+No, the server code will NEVER be displayed here.
 
 # GAMES:
 Gambling-starter: slots, starts with more money than Gambling10.
