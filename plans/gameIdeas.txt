@@ -7,3 +7,4 @@ Poker (hold em, select variant menu?)
 Solitaire (win get 5x your bet)
 These are mainly minigames, so a few are not really online.
 A new update I am thinking about is a game-specific leaderboard, like "oh this guy is better than this guy at ___", for solitaire or something.
+Both roulletes are going to be in the next primary update, which is January 14th.
