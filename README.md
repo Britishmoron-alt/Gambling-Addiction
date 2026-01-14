@@ -16,3 +16,4 @@ Slots: The first/main game, online.
 Going to add in ads, so I can host on an actual website.
 Current link is https://undeniably-preinaugural-demetra.ngrok-free.dev/
 Also going to finalize CAH, using user-submitted cards.
+So, once I get ads up-and-running, domain will be https://undeniably-preinaug.com/
