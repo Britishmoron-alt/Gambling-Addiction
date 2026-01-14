@@ -17,7 +17,7 @@ I think I'll also add in "Leagues" of wealth, basically individual leaderboards 
 Those with zero will have to use games/zeroGive.html.
 
 # GAMES:
-BJ: Blackjack, (note: have a larger bet or you won't be winning much)
+BJ: Blackjack, (note: have a larger bet or you won't be winning much. in the site, it isn't online yet.)
 
 PacMan Challenge: Play pacman with four lives, win with as many as possible to win a large amount of money. Finally patched it.
 
