@@ -1,0 +1,4 @@
+Badbet: You are broke. Use /games/zeroGive.html to fix.
+Not spinning? Spam the button.
+Says it is offline? Cat probably knocked over the computer, wait about 5 minutes and reload.
+Unable to play a game (with error code 009)? That doesn't exist yet, so get out of the future.
